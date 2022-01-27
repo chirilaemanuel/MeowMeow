@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:meow_meow/assets/config/theme/colorPalette.dart';
 import 'package:meow_meow/view_model/factListViewModel.dart';
 
-class FactList extends StatelessWidget {
+class FactList extends StatefulWidget {
 
   final List<FactViewModel> facts;
   final String imagesApiLink;
@@ -9,27 +10,64 @@ class FactList extends StatelessWidget {
   const FactList({Key? key, required this.facts, required this.imagesApiLink}) : super(key: key);
 
   @override
+  State<FactList> createState() => _FactListState();
+}
+
+class _FactListState extends State<FactList> {
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: facts.length,
+      itemCount: widget.facts.length,
       itemBuilder: (context, index) {
 
-        final fact = facts[index];
+        final fact = widget.facts[index];
 
-        return ListTile(
-          contentPadding: const EdgeInsets.all(10),
-          leading: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: NetworkImage(imagesApiLink + fact.imageNr.toString())
+        double screenWidth = MediaQuery.of(context).size.width;
+
+        return Card(
+          color: ColorPalette.blueLight,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Padding(padding: EdgeInsets.all(5),),
+              SizedBox(
+                height: screenWidth,
+                width: screenWidth,
+                child:
+                Image.network(
+                  widget.imagesApiLink + fact.imageNr.toString(),
+                  fit: BoxFit.cover,
+                  loadingBuilder: (BuildContext context, Widget child,
+                      ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Center(
+                      child: CircularProgressIndicator(
+                        value: loadingProgress.expectedTotalBytes != null
+                            ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                            : null,
+                      ),
+                    );
+                  },
                 ),
-                borderRadius: BorderRadius.circular(6)
-            ),
-            width: 300,
-            height: 300,
+              ),
+              const Padding(padding: EdgeInsets.all(5),),
+              Text(fact.title,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .subtitle1,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              const Padding(padding: EdgeInsets.all(5),),
+            ],
           ),
-          title: Text(fact.title),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5),
+          ),
+          margin: const EdgeInsets.all(5),
         );
       },
     );

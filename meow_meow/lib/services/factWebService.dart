@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class FactWebService {
 
-  Future<List<Fact>> fetchFacts(String factsApiLink) async {
+  Future<List<Fact>> fetchFactsAPI(String factsApiLink) async {
 
     final response = await http.get(Uri.parse(factsApiLink));
 
@@ -15,7 +15,7 @@ class FactWebService {
 
       return json.map((fact) => Fact.fromJson(fact)).toList();
 
-    } else { //TODO:fare case select con più status code
+    } else {
       throw Exception("Unable to perform request!");
     }
 

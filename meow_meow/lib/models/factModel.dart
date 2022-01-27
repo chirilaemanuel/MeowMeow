@@ -12,8 +12,8 @@ class Fact {
 
   factory Fact.fromJson(Map<String, dynamic> json) {
     return Fact(
-        title: json["Title"],
-        length: json["Poster"],
+        title: json["fact"] ?? "",
+        length: json["length"] ?? "",
         imageNr: Random().nextInt(15), //il numero lo genero random da 1 a 15
     );
   }

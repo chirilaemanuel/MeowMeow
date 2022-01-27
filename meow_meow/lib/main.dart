@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
 
   //this api returns pictures of kittens (gallery with 15 images -> ?image=15)
   static const String imagesApiLink = "https://placekitten.com";
-  static const int imagesWidth = 300;
-  static const int imagesHeight = 300;
+  static const int imagesWidth = 500;
+  static const int imagesHeight = 500;
 
   // This widget is the root of your application.
   @override
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           child: const MyHomePage(
             title: appTitle,
             factsApiLink: '$factsApiLink?max_length=$factsMaxLength&limit=$factsLimit',
-            imagesApiLink: '$imagesApiLink/$imagesWidth/$imagesHeight', //
+            imagesApiLink: '$imagesApiLink/$imagesWidth/$imagesHeight',
           ),
         )
     );

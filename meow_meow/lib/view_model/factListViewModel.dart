@@ -4,11 +4,11 @@ import 'package:meow_meow/services/factWebService.dart';
 
 class FactListViewModel extends ChangeNotifier {
 
-  List<FactViewModel> facts = <FactViewModel>[];
+  List<FactViewModel> facts = [];
 
   Future<void> fetchFacts(String factsApiLink) async {
 
-    final results =  await FactWebService().fetchFacts(factsApiLink);
+    final results =  await FactWebService().fetchFactsAPI(factsApiLink);
     facts = results.map((item) => FactViewModel(fact: item)).toList();
 
     if (kDebugMode) {
