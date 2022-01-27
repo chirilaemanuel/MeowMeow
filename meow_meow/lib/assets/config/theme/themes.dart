@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:meow_meow/assets/config/theme/colorPalette.dart';
 
+//risorsa: https://www.didierboelens.com/2020/05/material-textstyle-texttheme/
+
 class Themes {
 
   static  ThemeData customLightTheme() {
@@ -11,38 +13,29 @@ class Themes {
       brightness: Brightness.light,
       primaryColor: ColorPalette.blueLight,
       cardColor: Colors.white,
-      scaffoldBackgroundColor: Colors.white,
+      //scaffoldBackgroundColor: Colors.white,
       colorScheme: ColorScheme.fromSwatch(
           primarySwatch: ColorPalette.blueLight
       ),
       appBarTheme: const AppBarTheme(
         color: ColorPalette.blueLight,
       ),
-
       textTheme: TextTheme(
         ///TITOLO APPBAR
         headline6: TextStyle(
           fontSize: 30.0,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.getFont('MedievalSharp').fontFamily,
-          color: Colors.white,
-        ),
-        ///TOTOLO LISTA HORIZONTALE
-        headline4: TextStyle(
-          fontSize: 20.0,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.getFont('MedievalSharp').fontFamily,
-          color: ColorPalette.blueLight,
-        ),
-        ///TOTOLO ELEMENTO LISTA HORIZONTALE
-        subtitle1: TextStyle(
-          fontSize: 18.0,
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.getFont('Yatra One').fontFamily,
-          color: Colors.white,
+          fontFamily: GoogleFonts.getFont('Roboto').fontFamily,
+          color: Colors.black,
+        ),
+        ///TITOLO ITEM
+        subtitle1: TextStyle(
+          fontSize: 20.0,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.normal,
+          fontFamily: GoogleFonts.getFont('Roboto').fontFamily,
+          color: Colors.black,
         ),
       ),
     );
@@ -53,7 +46,7 @@ class Themes {
     return base.copyWith(
       platform: TargetPlatform.android,
       brightness: Brightness.dark,
-      primaryColor: Colors.yellow,
+      primaryColor: ColorPalette.blueDark,
       cardColor: Colors.white,
       //scaffoldBackgroundColor: Colors.black,
       colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -67,26 +60,18 @@ class Themes {
         ///TITOLO APPBAR
         headline6: TextStyle(
           fontSize: 30.0,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.getFont('MedievalSharp').fontFamily,
-          color: Colors.black,
-        ),
-        ///TOTOLO LISTA HORIZONTALE
-        headline4: TextStyle(
-          fontSize: 20.0,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.getFont('MedievalSharp').fontFamily,
-          color: ColorPalette.blueLight,
-        ),
-        ///TOTOLO ELEMENTO LISTA HORIZONTALE
-        subtitle1: TextStyle(
-          fontSize: 18.0,
           fontStyle: FontStyle.normal,
           fontWeight: FontWeight.bold,
-          fontFamily: GoogleFonts.getFont('Yatra One').fontFamily,
-          color: Colors.black,
+          fontFamily: GoogleFonts.getFont('Roboto').fontFamily,
+          color: Colors.white,
+        ),
+        ///TITOLO ITEM
+        subtitle1: TextStyle(
+          fontSize: 20.0,
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.normal,
+          fontFamily: GoogleFonts.getFont('Roboto').fontFamily,
+          color: Colors.white,
         ),
       ),
     );
