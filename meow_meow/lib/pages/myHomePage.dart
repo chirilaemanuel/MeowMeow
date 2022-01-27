@@ -29,6 +29,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     final vm = Provider.of<FactListViewModel>(context);
     return Scaffold(
+
       appBar: AppBar(
         title: Text(widget.title),
         //EFFETTO STONDATO ANGOLI BASSI APPBAR
@@ -39,15 +40,18 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
 
-      body: Container(
-          padding: const EdgeInsets.all(10),
-          child: Column(children: <Widget>[
-            Expanded(
-                child: FactList(facts: vm.facts, imagesApiLink: widget.imagesApiLink,)
-            ),
-          ])
-      )
-
+      body:
+      SafeArea(
+        child:
+          Container(
+              padding: const EdgeInsets.all(10),
+              child: Column(children: <Widget>[
+                Expanded(
+                    child: FactList(facts: vm.facts, imagesApiLink: widget.imagesApiLink,)
+                ),
+              ])
+          ),
+        ),
     );
   }
 }

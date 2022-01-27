@@ -8,6 +8,7 @@ class FactListViewModel extends ChangeNotifier {
 
   Future<void> fetchFacts(String factsApiLink) async {
 
+    //fetch dei dati
     final results =  await FactWebService().fetchFactsAPI(factsApiLink);
     facts = results.map((item) => FactViewModel(fact: item)).toList();
 

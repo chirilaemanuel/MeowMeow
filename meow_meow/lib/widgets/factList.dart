@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meow_meow/assets/config/theme/colorPalette.dart';
+import 'package:meow_meow/pages/myDetailPage.dart';
 import 'package:meow_meow/view_model/factListViewModel.dart';
 
 class FactList extends StatefulWidget {
@@ -23,46 +24,56 @@ class _FactListState extends State<FactList> {
         final fact = widget.facts[index];
 
         double screenWidth = MediaQuery.of(context).size.width;
+        //il link dell'imageNetwork è formato dal link dell api e un numero da 1 a 15 random, per immagini diverse
+        String imageNetworkLink = widget.imagesApiLink + fact.imageNr.toString();
 
         return Card(
           color: ColorPalette.blueLight,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Padding(padding: EdgeInsets.all(5),),
-              SizedBox(
-                height: screenWidth,
-                width: screenWidth,
-                child:
-                Image.network(
-                  widget.imagesApiLink + fact.imageNr.toString(),
-                  fit: BoxFit.cover,
-                  loadingBuilder: (BuildContext context, Widget child,
-                      ImageChunkEvent? loadingProgress) {
-                    if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                            : null,
-                      ),
-                    );
-                  },
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MyDetailPage(title: fact.title, imageNetworkLink: imageNetworkLink)),
+              );
+            },
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Padding(padding: EdgeInsets.all(5),),
+                SizedBox(
+                  height: screenWidth,
+                  width: screenWidth,
+                  child:
+                  Image.network(
+                    imageNetworkLink,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (BuildContext context, Widget child,
+                        ImageChunkEvent? loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                              loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
-              const Padding(padding: EdgeInsets.all(5),),
-              Text(fact.title,
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .subtitle1,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const Padding(padding: EdgeInsets.all(5),),
-            ],
+                const Padding(padding: EdgeInsets.all(5),),
+                Text(fact.title,
+                  style: Theme
+                      .of(context)
+                      .textTheme
+                      .subtitle1,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const Padding(padding: EdgeInsets.all(5),),
+              ],
+            ),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5),
